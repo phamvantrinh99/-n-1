@@ -71,6 +71,29 @@ int demsothich(FILE*fin) // ĐẾM SỐ LƯỢNG SỞ THÍCH
 	}
 	return (dem / 2) - 7;
 }
+void sothichmoinguoi(FILE* fin, SV sv[], int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		sv[i].x = demsothich(fin);
+	}
+	rewind(fin);
+}
+void GanNoiDung(FILE* fin, SV &sv)
+{
+	int i;
+	tachnoidung(fin, sv.mssv);
+	tachnoidung(fin, sv.hoten);
+	tachnoidung(fin, sv.major);
+	tachkhoahoc(fin, sv.khoa);
+	tachnoidung(fin, sv.birth);
+	tachnoidung(fin, sv.JPG);
+	tachnoidung(fin, sv.desc);
+	for (i = 0; i < sv.x; i++)
+	{
+		tachnoidung(fin, sv.hobby[i]);
+	}
+}
 void main()
 {
 	_setmode(_fileno(stdout), _O_U16TEXT);
