@@ -4,7 +4,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <codecvt> 
-#include <fstream>
 #include<wchar.h>
 
 using namespace std;
@@ -21,7 +20,7 @@ typedef struct SinhVien
 	wchar_t hobby[10][200];
 	int x;
 }SV;
-int demnguoi(FILE* fin)
+int SoSV(FILE* fin) //ĐẾM SỐ LƯỢNG SINH VIÊN
 {
 	int dem = 0;
 	wchar_t c[2000];
@@ -32,6 +31,45 @@ int demnguoi(FILE* fin)
 	} while (!feof(fin));
 	rewind(fin);
 	return dem;
+}
+void tachkhoahoc(FILE* fin, int &s) //TÁCH KHÓA HỌC
+{ 
+	fseek(fin, 2L, SEEK_CUR);
+	fwscanf(fin, L"%d", &s);
+	fseek(fin, 1L, SEEK_CUR);
+
+}
+void tachnoidung(FILE* fin, wchar_t noidung[]) //TÁCH NỘI DUNG SV
+{
+	int i = 0;
+	wchar_t c;
+	fseek(fin, 2L, SEEK_CUR);
+	while (1)
+	{
+		c = fgetwc(fin);
+		if (c == L'"' || c == L'\n' || c == EOF)
+			break;
+		else
+		{
+			noidung[i] = c;
+			i++;
+		}
+	}
+	noidung[i] = '\0';
+}
+int demsothich(FILE*fin) // ĐẾM SỐ LƯỢNG SỞ THÍCH
+{
+	int dem = 0;
+	wchar_t c;
+	while (!feof(fin))
+	{
+		c = fgetwc(fin);
+		if (c == L'"')
+			dem++;
+		if (c == '\n')
+			break;
+	}
+	return (dem / 2) - 7;
 }
 void main()
 {
