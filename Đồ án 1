@@ -143,6 +143,69 @@ void ghepsothich(SV sv, wchar_t dich[])
 		}
 	}
 }
+void timvachen(wchar_t c[], SV sv)
+{
+	wchar_t gmailsv[50];
+	wchar_t chuoisothich[1000]{};
+
+	ghepsothich(sv, chuoisothich);
+	wchar_t*e, *f, *g, *h, *k, *i, *l, *mail, *hoddys;
+	wchar_t EMAIL[30] = L"EMAIL";
+	wchar_t ten[30] = L"TÊN";
+	wchar_t mssv[10] = L"Mssv";
+	wchar_t major[30] = L"MAJOR";
+	wchar_t birth[20] = L"NGÀY SINH";
+	wchar_t JPG[100] = L"HINHANH";
+	wchar_t desc[1000] = L"MÔ TẢ";
+	wchar_t sothich[20] = L"SOTHICH";
+
+
+	hoddys = wcsstr(c, sothich);
+	if (hoddys != 0)
+	{
+		chenvao(sothich, c, chuoisothich);
+	}
+
+	e = wcsstr(c, ten);
+	if (e != 0)
+	{
+		chenvao(ten, c, sv.hoten);
+	}
+
+	f = wcsstr(c, mssv);
+	if (f != 0)
+	{
+		chenvao(mssv, c, sv.mssv);
+	}
+	g = wcsstr(c, major);
+	if (g != 0)
+	{
+		chenvao(major, c, sv.major);
+	}
+
+	i = wcsstr(c, birth);
+	if (i != 0)
+	{
+		chenvao(birth, c, sv.birth);
+	}
+	k = wcsstr(c, JPG);
+	if (k != 0)
+	{
+		chenvao(JPG, c, sv.JPG);
+	}
+	l = wcsstr(c, desc);
+	if (l != 0)
+	{
+		chenvao(desc, c, sv.desc);
+	}
+
+	Gmail(sv.mssv, gmailsv);
+	mail = wcsstr(c, EMAIL);
+	if (mail != 0)
+	{
+		chenvao(EMAIL, c, gmailsv);
+	}
+}
 void main()
 {
 	_setmode(_fileno(stdout), _O_U16TEXT);
