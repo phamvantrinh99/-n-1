@@ -94,6 +94,28 @@ void GanNoiDung(FILE* fin, SV &sv)
 		tachnoidung(fin, sv.hobby[i]);
 	}
 }
+wchar_t* duongdanhtml(SV sv)
+{
+	wchar_t tenweb[50] = L"Websites\\";
+	wchar_t duoifile[50] = L".html";
+	wcscat(tenweb, sv.mssv);
+	wcscat(tenweb, duoifile);
+	return tenweb;
+}
+
+void chenvao(wchar_t cantim[], wchar_t chuoicha[], wchar_t chuoichen[])
+{
+	wchar_t gep1[200];
+	wchar_t* gep2;
+	chuoicha = wcsstr(chuoicha, cantim);
+	int n = wcslen(chuoicha) - wcslen(chuoicha);
+	wcsncpy(gep1, chuoicha, n);
+	gep1[n] = L'\0';
+	wcscat(chuoichen, chuoicha + wcslen(cantim));
+	wcscat(gep1, chuoichen);
+	wcscpy(chuoicha, gep1);
+
+}
 void main()
 {
 	_setmode(_fileno(stdout), _O_U16TEXT);
