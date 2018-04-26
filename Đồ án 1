@@ -116,6 +116,33 @@ void chenvao(wchar_t cantim[], wchar_t chuoicha[], wchar_t chuoichen[])
 	wcscpy(chuoicha, gep1);
 
 }
+void Gmail(wchar_t a[], wchar_t mail[])
+{
+	wcslwr(a);
+	wchar_t b[30] = L"@student.hcmus.edu.vn";
+	//mail[0] = a[0];
+	for (int i = 0; i < wcslen(a); i++)
+	{
+			mail[i] = a[i];
+	}
+	//*mail = *a;
+	mail[wcslen(a)] = L'\0';
+	wcscat(mail, b);
+
+}
+void ghepsothich(SV sv, wchar_t dich[])
+{
+	if (sv.x == 0){
+		dich[0] = '\0';
+	}
+	else{
+		for (int i = 0; i < sv.x; i++){
+			wcscat(dich, L"<li>");
+			wcscat(dich, sv.hobby[i]);
+			wcscat(dich, L"</li>");
+		}
+	}
+}
 void main()
 {
 	_setmode(_fileno(stdout), _O_U16TEXT);
