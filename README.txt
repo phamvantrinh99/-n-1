@@ -1,5 +1,6 @@
 # DoAn1
-Phạm Văn Trình, MSSV: 1712841
+Phạm Văn Trình
+MSSV: 1712841
 Lớp: 17CTT7
 gmail: trinhpham5337@gmail.com
 _____________________________________________
