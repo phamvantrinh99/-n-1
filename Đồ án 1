@@ -205,15 +205,56 @@ void timvachen(wchar_t c[], SV sv)
 	{
 		chenvao(EMAIL, c, gmailsv);
 	}
-}     
+}
+void xuatnoidungvaohtml(FILE* fDefault, FILE*csv, SV &sv)
+{
+	rewind(fDefault);
+	wchar_t c[500];
+	while (!feof(fDefault))
+	{
+		fgetws(c, 500, fDefault);
+		timvachen(c, sv);
+		fputws(c, csv);
+	}
+	fclose(csv);
+}
 void main()
 {
 	_setmode(_fileno(stdout), _O_U16TEXT);
-	_setmode(_fileno(stdin), _O_U16TEXT);// hien tieng viet tren CMD
+	_setmode(_fileno(stdin), _O_U16TEXT);
 	SV sv[20];
 	int soSV, k;
-	FILE *fin = _wfopen(L"ListSV.csv", L"r, ccs=UTF-8");
+	FILE *fin = _wfopen(L"SV.csv", L"r, ccs=UTF-8");
 	if (!fin)
 		wprintf(L"Không thể đọc file \n");
+	else
+	{
+		soSV = SoSV(fin);
+
+		sothichmoinguoi(fin, sv, soSV);
+		fseek(fin, 1L, SEEK_CUR);
+		for (k = 0; k < soSV; k++)
+		{
+			fseek(fin, 1L, SEEK_CUR);
+			GanNoiDung(fin, sv[k]);
+		}
+	}
+	int i = 0;
+	wchar_t *tenweb;
+	FILE *fDefault = _wfopen(L"Default.html", L"r, ccs=UTF-8");
+	if (!fDefault)
+		wprintf(L"Không thể đọc .file \n");
 	else{
-		soSV = demnguoi(fin);
+		while (i < soSV)
+		{
+			tenweb = duongdanhtml(sv[i]);
+			FILE *fweb = _wfopen(tenweb, L"wt, ccs=UTF-8");
+			if (!fweb)
+				wprintf(L"Không thể mở file \n");
+			else
+				xuatnoidungvaohtml(fDefault, fweb, sv[i]);
+			i++;
+		}
+	}
+	fclose(fin);
+}
