@@ -1,4 +1,4 @@
-# DoAn1
+# DoAn1 - Chen thong tin bats ki vao file HTML
 Tên sinh viên: Phạm Văn Trình
 MSSV: 1712841
 Lớp: 17CTT7
